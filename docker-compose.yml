@@ -3,6 +3,10 @@ version: '3.9'
 networks:
   public_net:
     driver: bridge
+    ipam:
+      config:
+        - subnet: 172.18.0.0/16
+  
   lan_1:
     driver: bridge
     ipam:
@@ -25,17 +29,19 @@ networks:
 services:
   web:
     build:
-      context: .
-      dockerfile: Dockerfile-nginx
+      context: ./activemq_server
+      dockerfile: Dockerfile
     container_name: web_service
+    privileged: true
     networks:
       lan_3:
         ipv4_address: 192.168.30.100
-
+#      public_net:
+#        ipv4_address: 172.18.0.4
   ws1:
     build:
-      context: .
-      dockerfile: Dockerfile-ws1
+      context: ./ws1
+      dockerfile: Dockerfile
     privileged: true
     container_name: ws1
     environment:
@@ -51,8 +57,8 @@ services:
 
   ws2:
     build:
-      context: .
-      dockerfile: Dockerfile-ws2
+      context: ./ws2
+      dockerfile: Dockerfile
     container_name: ws2
     privileged: true
     environment:
@@ -67,8 +73,8 @@ services:
 
   ws3:
     build:
-      context: .
-      dockerfile: Dockerfile-ws3
+      context: ./ws3
+      dockerfile: Dockerfile
     container_name: ws3
     privileged: true
     environment:
@@ -81,25 +87,43 @@ services:
       lan_2:
         ipv4_address: 192.168.20.10
 
+  attacker:
+    build:
+      context: ./attacker
+      dockerfile: Dockerfile
+    container_name: attacker
+    privileged: true
+    environment:
+      - DISPLAY=${DISPLAY}
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix
+    stdin_open: true
+    tty: true
+    networks:
+      public_net:
+        ipv4_address: 172.18.0.2
+
 
   outer_gw:
     privileged: true
     build:
-      context: .
-      dockerfile: Dockerfile-outergw
+      context: ./outer_gw
+      dockerfile: Dockerfile
     container_name: outer_gw
     ports:
       - "8080:80"
+      - "61616:61616"
     networks:
       lan_3:
         ipv4_address: 192.168.30.2
       public_net:
+        ipv4_address: 172.18.0.3
 
   inner_gw:
     privileged: true
     build:
-      context: .
-      dockerfile: Dockerfile-innergw
+      context: ./inner_gw
+      dockerfile: Dockerfile
     container_name: inner_gw
     networks:
       lan_1:

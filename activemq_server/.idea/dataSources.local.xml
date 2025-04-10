@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal" created-in="IU-242.23339.11">
+    <data-source name="db_iot@localhost" uuid="9f6c52cb-d9b0-46a3-ae05-a2e6cbbce781">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="MYSQL" />
+      <user-name>hungnq</user-name>
+      <schema-mapping />
+    </data-source>
+  </component>
+</project>

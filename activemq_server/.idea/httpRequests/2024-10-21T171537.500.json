@@ -1,0 +1,6 @@
+{
+  "timestamp": 1729505737609,
+  "status": 500,
+  "error": "Internal Server Error",
+  "path": "/api/v1/getDeviceHistory"
+}

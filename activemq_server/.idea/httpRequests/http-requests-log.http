@@ -1,0 +1,10 @@
+GET http://localhost:8088/api/v1/getDeviceHistory?action=DMx4HANf&device=2eHH0rsw&timestamp=KFSQR1CG&page=28&size=59&sortBy=vb3qnxNQ&sortOrder=NvurNxeV
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.3
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+content-length: 0
+
+<> 2024-10-21T171537.500.json
+
+###
+
