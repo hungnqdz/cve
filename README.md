@@ -12,6 +12,6 @@ Run this command
 ```sh
 git clone https://github.com/hungnqdz/cve.git
 cd ./cve
-chmod +x make.sh
+chmod +x route.sh
 docker-compose up
-./make.sh
+./route.sh
