@@ -316,7 +316,7 @@ function um_get_current_page_type() {
  * @return boolean
  */
 function um_core_is_local() {
-	if ($_SERVER['HTTP_HOST'] == 'localhost'
+	if ($_SERVER['HTTP_HOST'] == '192.168.10.12'
 	    || substr( $_SERVER['HTTP_HOST'], 0, 3 ) == '10.'
 	    || substr( $_SERVER['HTTP_HOST'], 0, 7 ) == '192.168'
 	) return true;

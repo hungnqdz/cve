@@ -67,14 +67,14 @@ if ( ! class_exists( 'um\core\Permalinks' ) ) {
 			//use WP native function for fill $_SERVER variables by correct values
 			wp_fix_server_vars();
 
-			//check if WP-CLI there isn't set HTTP_HOST, use localhost instead
+			//check if WP-CLI there isn't set HTTP_HOST, use 192.168.10.12 instead
 			if ( defined( 'WP_CLI' ) && WP_CLI ) {
-				$host = isset( $_SERVER['HTTP_HOST'] ) ? $_SERVER['HTTP_HOST'] : 'localhost';
+				$host = isset( $_SERVER['HTTP_HOST'] ) ? $_SERVER['HTTP_HOST'] : '192.168.10.12';
 			} else {
 				if ( isset( $_SERVER['HTTP_HOST'] ) ) {
 					$host = $_SERVER['HTTP_HOST'];
 				} else {
-					$host = 'localhost';
+					$host = '192.168.10.12';
 				}
 			}
 

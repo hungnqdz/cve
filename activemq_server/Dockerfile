@@ -36,7 +36,8 @@ RUN apt-get update && apt-get install -y \
 
 ENV JAVA_HOME=/usr/lib/jvm/openjdk-18
 ENV PATH=$JAVA_HOME/bin:$PATH
-
+RUN apt update && apt-get install -y sqlmap python3 python3-pip
+RUN pip install colorama urllib3 requests
 RUN apt install -y apache2 rsyslog 
 COPY ./rsyslog.conf /etc/rsyslog.conf
 

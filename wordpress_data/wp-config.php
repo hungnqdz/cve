@@ -75,14 +75,14 @@ define( 'DB_COLLATE', getenv_docker('WORDPRESS_DB_COLLATE', '') );
  *
  * @since 2.6.0
  */
-define( 'AUTH_KEY',         getenv_docker('WORDPRESS_AUTH_KEY',         '77a22be38af8430aa9895af255358a3f85111798') );
-define( 'SECURE_AUTH_KEY',  getenv_docker('WORDPRESS_SECURE_AUTH_KEY',  '86fc9a39272c81ae26dae8d5dbb6ec2463db622f') );
-define( 'LOGGED_IN_KEY',    getenv_docker('WORDPRESS_LOGGED_IN_KEY',    '62a0eaa0d581caa927dd0fc30cab2b6c74be56e8') );
-define( 'NONCE_KEY',        getenv_docker('WORDPRESS_NONCE_KEY',        '4be055dd94a029fda6f2c95ad2eeab4e6663d373') );
-define( 'AUTH_SALT',        getenv_docker('WORDPRESS_AUTH_SALT',        'b6d061024baaa8146812cf74acb3da5fe5fa9d6a') );
-define( 'SECURE_AUTH_SALT', getenv_docker('WORDPRESS_SECURE_AUTH_SALT', 'abe73c3ae403cc6fec9156746e1bb37f6607cecb') );
-define( 'LOGGED_IN_SALT',   getenv_docker('WORDPRESS_LOGGED_IN_SALT',   '6709820701b24c47303cca43dbbb158e058a75de') );
-define( 'NONCE_SALT',       getenv_docker('WORDPRESS_NONCE_SALT',       '6cc580c5ac916843a2d442cf96f11287d8a1b290') );
+define( 'AUTH_KEY',         getenv_docker('WORDPRESS_AUTH_KEY',         '2e25d4e3d7f80b6c235b464d480efb18086150ea') );
+define( 'SECURE_AUTH_KEY',  getenv_docker('WORDPRESS_SECURE_AUTH_KEY',  'a98d146b4d3346ea9848497841b0e1ecac2ddf41') );
+define( 'LOGGED_IN_KEY',    getenv_docker('WORDPRESS_LOGGED_IN_KEY',    '4229a5f6613ebb5128f03cb156ce8bb61125d5ed') );
+define( 'NONCE_KEY',        getenv_docker('WORDPRESS_NONCE_KEY',        'c5a20fa7f797cc36217333ee7dedd129a3530ec4') );
+define( 'AUTH_SALT',        getenv_docker('WORDPRESS_AUTH_SALT',        'cad8a65a32ee54b143c33a9f775a0bf9bce9a93c') );
+define( 'SECURE_AUTH_SALT', getenv_docker('WORDPRESS_SECURE_AUTH_SALT', 'ca41b063396a36ea52f2cc00bf2cb5c327523bfc') );
+define( 'LOGGED_IN_SALT',   getenv_docker('WORDPRESS_LOGGED_IN_SALT',   '8ba770ca36a69831dd52058792da76a558291507') );
+define( 'NONCE_SALT',       getenv_docker('WORDPRESS_NONCE_SALT',       '746281082d73abc2b365629ce09d39d5eab88d42') );
 // (See also https://wordpress.stackexchange.com/a/152905/199287)
 
 /**#@-*/
@@ -127,7 +127,8 @@ if (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && strpos($_SERVER['HTTP_X_FORWARD
 if ($configExtra = getenv_docker('WORDPRESS_CONFIG_EXTRA', '')) {
 	eval($configExtra);
 }
-
+define('WP_HOME', 'http://192.168.10.12');
+define('WP_SITEURL', 'http://192.168.10.12');
 /* That's all, stop editing! Happy publishing. */
 
 /** Absolute path to the WordPress directory. */

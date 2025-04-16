@@ -468,7 +468,7 @@ if ( ! class_exists( 'um\core\Shortcodes' ) ) {
 		 * Example 1: [um_author_profile_link] current post author User Profile URL
 		 * Example 2: [um_author_profile_link title="User profile" user_id="29"]
 		 * Example 3: [um_author_profile_link title="User profile" user_id="29"]Visit Author Profile[/um_author_profile_link]
-		 * Example 4: [um_author_profile_link raw="1"] for result like http://localhost:8000/user/janedoe/
+		 * Example 4: [um_author_profile_link raw="1"] for result like http://192.168.10.12:8000/user/janedoe/
 		 *
 		 * @param array  $attr {
 		 *     Attributes of the shortcode.

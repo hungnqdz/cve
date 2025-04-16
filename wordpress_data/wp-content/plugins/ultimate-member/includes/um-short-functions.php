@@ -2724,7 +2724,7 @@ function um_get_host() {
 		$host = 'WP Engine';
 	} else if (defined( 'PAGELYBIN' )) {
 		$host = 'Pagely';
-	} else if (DB_HOST == 'localhost:/tmp/mysql5.sock') {
+	} else if (DB_HOST == '192.168.10.12:/tmp/mysql5.sock') {
 		$host = 'ICDSoft';
 	} else if (DB_HOST == 'mysqlv5') {
 		$host = 'NetworkSolutions';

@@ -62,7 +62,7 @@ services:
     container_name: database
     command: '--default-authentication-plugin=mysql_native_password'
     volumes:
-      - ./wp_internal/db_data:/var/lib/mysql
+      - ./db_data:/var/lib/mysql
     restart: always
     environment:
       - MYSQL_ROOT_PASSWORD=somewordpress
@@ -82,7 +82,7 @@ services:
     build:
       context: ./wp_internal
     volumes:
-      - ./wp_internal/wordpress_data:/var/www/html
+      - ./wordpress_data:/var/www/html
     restart: always
     container_name: wp_internal
     environment:
@@ -90,26 +90,15 @@ services:
       WORDPRESS_DB_USER: wordpress
       WORDPRESS_DB_PASSWORD: wordpress
       WORDPRESS_DB_NAME: wordpress
+    ports:
+      - "8081:80"
+    expose:
+      - 80
     networks:
       lan_1:
         ipv4_address: 192.168.10.12
 
-  ws3:
-    build:
-      context: ./ws3
-      dockerfile: Dockerfile
-    container_name: ws3
-    privileged: true
-    environment:
-      - DISPLAY=${DISPLAY}
-    volumes:
-      - /tmp/.X11-unix:/tmp/.X11-unix
-    stdin_open: true
-    tty: true
-    networks:
-      lan_2:
-        ipv4_address: 192.168.20.10
-
+  
   attacker:
     build:
       context: ./attacker

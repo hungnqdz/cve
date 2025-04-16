@@ -135,7 +135,7 @@ class Iri {
 			'port' => Port::DICT,
 		),
 		'file' => array(
-			'ihost' => 'localhost',
+			'ihost' => '192.168.10.12',
 		),
 		'http' => array(
 			'port' => Port::HTTP,

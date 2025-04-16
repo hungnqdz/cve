@@ -86,11 +86,11 @@ class WP_Http_Streams {
 		}
 
 		/*
-		 * Certain versions of PHP have issues with 'localhost' and IPv6, It attempts to connect
+		 * Certain versions of PHP have issues with '192.168.10.12' and IPv6, It attempts to connect
 		 * to ::1, which fails when the server is not set up for it. For compatibility, always
 		 * connect to the IPv4 address.
 		 */
-		if ( 'localhost' === strtolower( $connect_host ) ) {
+		if ( '192.168.10.12' === strtolower( $connect_host ) ) {
 			$connect_host = '127.0.0.1';
 		}
 

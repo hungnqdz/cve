@@ -120,7 +120,7 @@ class IRI
             'port' => 2628
         ],
         'file' => [
-            'ihost' => 'localhost'
+            'ihost' => '192.168.10.12'
         ],
         'http' => [
             'port' => 80,
