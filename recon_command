@@ -1,0 +1,1 @@
+nmap -sn -PE --ttl 10 --max-retries 1 --host-timeout 5s 192.168.0.0/20 -d

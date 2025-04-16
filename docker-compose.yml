@@ -12,32 +12,35 @@ networks:
     ipam:
       config:
         - subnet: 192.168.10.0/24
-#          gateway: 192.168.10.2
+
   lan_2:
     driver: bridge
     ipam:
       config:
         - subnet: 192.168.20.0/24
-#          gateway: 192.168.20.2
+
   lan_3:
     driver: bridge
     ipam:
       config:
         - subnet: 192.168.30.0/24
-#          gateway: 192.168.30.2
+
 
 services:
   web:
     build:
       context: ./activemq_server
       dockerfile: Dockerfile
-    container_name: web_service
+    container_name: public_web_service
+    environment:
+      - DISPLAY=${DISPLAY}
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix
     privileged: true
     networks:
       lan_3:
         ipv4_address: 192.168.30.100
-#      public_net:
-#        ipv4_address: 172.18.0.4
+
   ws1:
     build:
       context: ./ws1
@@ -54,22 +57,42 @@ services:
       lan_1:
         ipv4_address: 192.168.10.10
 
-
-  ws2:
-    build:
-      context: ./ws2
-      dockerfile: Dockerfile
-    container_name: ws2
-    privileged: true
-    environment:
-      - DISPLAY=${DISPLAY}
+  db:
+    image: mariadb:10.6.4-focal
+    container_name: database
+    command: '--default-authentication-plugin=mysql_native_password'
     volumes:
-      - /tmp/.X11-unix:/tmp/.X11-unix
-    stdin_open: true
-    tty: true
+      - ./wp_internal/db_data:/var/lib/mysql
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=somewordpress
+      - MYSQL_DATABASE=wordpress
+      - MYSQL_USER=wordpress
+      - MYSQL_PASSWORD=wordpress
+    expose:
+      - 3306
+      - 33060
     networks:
       lan_1:
-        ipv4_address: 192.168.10.11
+        ipv4_address: 192.168.10.13
+
+  wordpress:
+    depends_on:
+      - db
+    build:
+      context: ./wp_internal
+    volumes:
+      - ./wp_internal/wordpress_data:/var/www/html
+    restart: always
+    container_name: wp_internal
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress
+      WORDPRESS_DB_NAME: wordpress
+    networks:
+      lan_1:
+        ipv4_address: 192.168.10.12
 
   ws3:
     build:
@@ -102,6 +125,22 @@ services:
     networks:
       public_net:
         ipv4_address: 172.18.0.2
+
+  php_internal:
+    build:
+      context: ./web_service_php
+      dockerfile: Dockerfile
+    container_name: php_internal
+    privileged: true
+    environment:
+      - DISPLAY=${DISPLAY}
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix
+    stdin_open: true
+    tty: true
+    networks:
+      lan_1:
+        ipv4_address: 192.168.10.11
 
 
   outer_gw:
