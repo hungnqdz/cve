@@ -43,6 +43,16 @@ COPY ./rsyslog.conf /etc/rsyslog.conf
 
 RUN useradd -u 5000 chat && mkdir -p /home/chat && chown -R chat:chat /home/chat
 
+RUN apt install -y openssh-server && \
+    mkdir /var/run/sshd
+
+
+RUN useradd -rm -d /home/ubuntu -s /bin/bash -g root -G sudo -u 1000 ubuntu \
+    && echo 'ubuntu:password' | chpasswd
+
+RUN sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config \
+    && sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd
+
 WORKDIR /home/chat
 
 COPY exploit.c .
@@ -87,7 +97,7 @@ RUN cd /opt/ApacheActiveMQ && \
     chown -R chat:chat /opt/ApacheActiveMQ && \
     chmod +x /opt/ApacheActiveMQ/apache-activemq-5.18.2/bin/linux-x86-64/activemq
 
-EXPOSE 61616 8080 8161
+EXPOSE 61616 8080 8161 22
 
 COPY ./config-web-server.sh /config-web-server.sh
 RUN chmod +x config-web-server.sh

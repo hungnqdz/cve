@@ -6,8 +6,8 @@ RUN apt-get update && apt-get install -y \
     tcpdump \
     net-tools \
     curl \
-    iputils-ping \
-    && rm -rf /var/lib/apt/lists/*
+    iputils-ping
+
 RUN echo "net.ipv4.ip_forward=1" > /etc/sysctl.conf
 
 COPY config-outer-gw.sh /config-outer-gw.sh
