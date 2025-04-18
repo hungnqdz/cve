@@ -15,5 +15,5 @@ cd ./cve
 chmod +x make.sh
 docker-compose up
 ./make.sh
-
+```
 If any problems happen with wp_internal, try to remove wordpress_data and db_data
